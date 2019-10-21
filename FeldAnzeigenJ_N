@@ -1,0 +1,20 @@
+Option Base 1 
+
+Sub FeldAnzeigen()
+
+Dim varFelder() As Variant
+Dim varAnzeige() As Variant
+Dim i As Integer
+
+varFelder = Array("Feld1", "Feld2", "Feld3")
+varAnzeige = Array(1, 0, 1)
+
+For i = 1 To 3
+    If varAnzeige(i) = 1 Then
+        Debug.Print (varFelder(i) & " wird angezeigt")
+    Else: Debug.Print (varFelder(i) & " wird nicht angezeigt")
+    End If
+Next i
+
+
+End Sub
