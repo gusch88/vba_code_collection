@@ -1,0 +1,38 @@
+Option Explicit
+
+'Quick Reference
+
+'Public Function LetZeiNum
+'Public Function LetSpaNum
+
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+'INPUT          : Sheet, das Worksheet, in dem wir die letzte Zeile finden wollen
+'OUTPUT         : Long, die erste Zeile, die nicht befüllt ist.
+'SPECIAL CASE:  : wenn das Sheet leer ist, ist die erste Zeile 1
+Public Function ErstZeiNum(Sheet As Worksheet, Optional Spalte As Long = 1) As Long
+    If Application.WorksheetFunction.CountA(Sheet.Cells(1, Spalte).EntireColumn) <> 0 Then
+        ErstZeiNum = Sheet.Cells(1, Spalte).EntireColumn.Find(What:="*", _
+                                    LookIn:=xlFormulas, _
+                                    SearchOrder:=xlByRows, _
+                                    SearchDirection:=xlPrevious).Row
+    Else
+        ErstZeiNum = 0
+    End If
+    ErstZeiNum = ErstZeiNum + 1
+End Function
+
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+'INPUT          : Sheet, das Worksheet, in dem wir die letzte Spalte finden wollen
+'OUTPUT         : Long, die erste Spalte, die nicht befüllt ist.
+'SPECIAL CASE:  : wenn das Sheet leer ist, ist die erste Zeile 1
+Public Function ErstSpaNum(Sheet As Worksheet, Optional Zeile As Long = 1) As Long
+    If Application.WorksheetFunction.CountA(Sheet.Cells(Zeile, 1).EntireRow) <> 0 Then
+        ErstSpaNum = Sheet.Cells(Zeile, 1).EntireRow.Find(What:="*", _
+                                    LookIn:=xlFormulas, _
+                                    SearchOrder:=xlByColumns, _
+                                    SearchDirection:=xlPrevious).Column
+    Else
+        ErstSpaNum = 0
+    End If
+    ErstSpaNum = ErstSpaNum + 1
+End Function
