@@ -1,12 +1,18 @@
+Option Explicit
+
 'Funktion zur Erstellung eines Strings aus einem Range
 
-Public Function verketten_1(rng As range, trennzeichen As String)
+Public Function verketten_1(rng As range, trennzeichen As String, Optional schema As String, Optional bolLeerÜberspringen As Boolean = True)
+Dim x
 
-verketten_1 = rng(1, 1) ' erstes Objekt eines Range
+If schema <> "" Then schema = schema & "."
 
 For Each x In rng:
-    verketten_1 = verketten_1 & trennzeichen & Chr(32) & x
+    If x <> "" And bolLeerÜberspringen = True Then
+    verketten_1 = verketten_1 & trennzeichen & Chr(32) & schema & x
+    End If
 Next
 
-End Function
+verketten_1 = Right(verketten_1, Len(verketten_1) - 2)
 
+End Function
