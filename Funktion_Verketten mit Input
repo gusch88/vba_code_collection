@@ -1,0 +1,12 @@
+'Funktion zur Erstellung eines Strings aus einem Range
+
+Public Function verketten_1(rng As range, trennzeichen As String)
+
+verketten_1 = rng(1, 1) ' erstes Objekt eines Range
+
+For Each x In rng:
+    verketten_1 = verketten_1 & trennzeichen & Chr(32) & x
+Next
+
+End Function
+
