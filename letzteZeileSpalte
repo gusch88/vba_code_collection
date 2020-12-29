@@ -1,4 +1,4 @@
-Option Explicit 'Variablen müssen deklariert werden
+Option Explicit
 
 'Quick Reference
 
@@ -9,31 +9,30 @@ Option Explicit 'Variablen müssen deklariert werden
 'INPUT          : Sheet, das Worksheet, in dem wir die letzte Zeile finden wollen
 'OUTPUT         : Long, die erste Zeile, die nicht befüllt ist.
 'SPECIAL CASE:  : wenn das Sheet leer ist, ist die erste Zeile 1
-Public Function LetZeiNum(Sheet As Worksheet, Optional Spalte As Long = 1) As Long
+Public Function ErstZeiNum(Sheet As Worksheet, Optional Spalte As Long = 1) As Long
     If Application.WorksheetFunction.CountA(Sheet.Cells(1, Spalte).EntireColumn) <> 0 Then
-        LetZeiNum = Sheet.Cells(1, Spalte).EntireColumn.Find(What:="*", _
+        ErstZeiNum = Sheet.Cells(1, Spalte).EntireColumn.Find(What:="*", _
                                     LookIn:=xlFormulas, _
                                     SearchOrder:=xlByRows, _
                                     SearchDirection:=xlPrevious).Row
     Else
-        LetZeiNum = 0
+        ErstZeiNum = 0
     End If
-    LetZeiNum = LetZeiNum
+    ErstZeiNum = ErstZeiNum + 1
 End Function
 
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 'INPUT          : Sheet, das Worksheet, in dem wir die letzte Spalte finden wollen
 'OUTPUT         : Long, die erste Spalte, die nicht befüllt ist.
 'SPECIAL CASE:  : wenn das Sheet leer ist, ist die erste Zeile 1
-Public Function LetSpaNum(Sheet As Worksheet, Optional Zeile As Long = 1) As Long
+Public Function ErstSpaNum(Sheet As Worksheet, Optional Zeile As Long = 1) As Long
     If Application.WorksheetFunction.CountA(Sheet.Cells(Zeile, 1).EntireRow) <> 0 Then
-        LetSpaNum = Sheet.Cells(Zeile, 1).EntireRow.Find(What:="*", _
+        ErstSpaNum = Sheet.Cells(Zeile, 1).EntireRow.Find(What:="*", _
                                     LookIn:=xlFormulas, _
                                     SearchOrder:=xlByColumns, _
                                     SearchDirection:=xlPrevious).Column
     Else
-        LetSpaNum = 0
+        ErstSpaNum = 0
     End If
-    LetSpaNum = LetSpaNum
+    ErstSpaNum = ErstSpaNum + 1
 End Function
-
