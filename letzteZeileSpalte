@@ -2,8 +2,8 @@ Option Explicit
 
 'Quick Reference
 
-'Public Function LetZeiNum
-'Public Function LetSpaNum
+'Public Function ErstZeiNum
+'Public Function ErstSpaNum
 
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 'INPUT          : Sheet, das Worksheet, in dem wir die letzte Zeile finden wollen
