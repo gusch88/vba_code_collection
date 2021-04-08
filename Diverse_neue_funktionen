@@ -1,0 +1,63 @@
+Option Explicit
+
+
+Public Function LagLeadMaker(strLagLead As String, strField As String, strKey As String, strOrderBy As String, Optional lengthSchema As Integer = 1)
+
+
+LagLeadMaker = strLagLead & "(" & strField & ")OVER(PARTITION BY " & strKey & " ORDER BY " & strOrderBy & ") AS " & Right(strField, Len(strField) - lengthSchema - 1) & "_" & strLagLead
+'LAG(#FIELD)OVER(PARTITION BY #KEYS ORDER BY #ORDER_BY
+
+
+End Function
+
+
+
+' Input:
+' strText: Text, der durchsucht werden soll.
+' strZeichen1: Erstes Zeichen (oder Zeichenkette) zwischen denen der gesuchte Text ist.
+' strZeichen2: Zweites Zeichen (oder Zeichenkette) zwischen denen der gesuchte Text ist. Optional: Wenn nicht angegeben dann = strZeichen1
+' intStelle: Wenn mehrmals die String1 und String2 vorliegen, an welcher Stelle soll der Text genommen werden? Optional: Wenn nicht angegeben,
+' dann = 1 , also die erste Stelle.
+Public Function teilSuche(strText As String, strZeichen1 As String, Optional strZeichen2 = "", Optional intStelle As Integer = 1)
+
+Dim arrText() As String
+Dim intSuche As Integer
+
+intSuche = InStr(strText, strZeichen1)
+
+If intSuche = 0 Then
+    teilSuche = "###Zeichen nicht gefunden###"
+    Exit Function
+End If
+
+arrText = Split(strText, strZeichen1)
+
+If intStelle > UBound(arrText) Then
+    teilSuche = "###Fehler: Stelle nicht mehr im String enthalten###"""
+    Exit Function
+End If
+
+arrText = Split(arrText(intStelle), strZeichen2)
+
+teilSuche = arrText
+
+End Function
+
+
+
+'Funktion zur Erstellung eines Strings aus einem Range
+
+Public Function verketten_1(rng As Range, trennzeichen As String, Optional schema As String, Optional bolLeerÜberspringen As Boolean = True)
+Dim x
+
+If schema <> "" Then schema = schema & "."
+
+For Each x In rng:
+    If x <> "" And bolLeerÜberspringen = True Then
+    verketten_1 = verketten_1 & trennzeichen & Chr(32) & schema & x
+    End If
+Next
+
+verketten_1 = Right(verketten_1, Len(verketten_1) - 2)
+
+End Function
