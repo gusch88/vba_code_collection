@@ -1,0 +1,22 @@
+Public Function ERSETZE_2(strText As String, ParamArray strInput() As Variant) As String
+
+' Mit dieser Funktion kann man einem Text Platzhalter mitgeben (in geschweiften {} Klammern)
+' Diese Platzhalter kann man am Ende ersetzen#
+' Beispiel:
+' Eingabe: =ERSETZE_2("WERT_1 = {} und WERT_2 = {}";15;30)
+' Text: WERT_1 = {} und WERT_2 = {}
+' Parameter: 15,30
+' Ergebnis: WERT_1 = 15 und WERT_2 = 30
+
+
+ Dim iInput As Long
+ arrInput = strInput
+ 
+    For iInput = LBound(arrInput) To UBound(arrInput)
+        Debug.Print (arrInput(iInput))
+        strText = Replace(strText, "{}", arrInput(iInput), 1, iInput + 1)
+    Next iInput
+    
+ERSETZE_2 = strText
+
+End Function
