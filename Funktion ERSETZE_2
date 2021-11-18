@@ -14,7 +14,7 @@ Public Function ERSETZE_2(strText As String, ParamArray strInput() As Variant) A
  
     For iInput = LBound(arrInput) To UBound(arrInput)
         Debug.Print (arrInput(iInput))
-        strText = Replace(strText, "{}", arrInput(iInput), 1, iInput + 1)
+        strText = Replace(strText, "{}", arrInput(iInput), 1, 1)
     Next iInput
     
 ERSETZE_2 = strText
